@@ -3,14 +3,24 @@ import { connect } from 'react-redux';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Checkbox from '@material-ui/core/Checkbox';
+import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
+import IconButton from '@material-ui/core/IconButton';
+import DeleteIcon from '@material-ui/icons/Delete';
+import EditIcon from '@material-ui/icons/Edit';
 
-import { toggleTodoCompletion } from '../redux/todo/todoActions';
+import { toggleTodoCompletion, removeTodo } from '../redux/todo/todoActions';
 
-const Todo = ({ todo, toggleCompletion }) => {
+const Todo = ({ todo, toggleCompletion, deleteTodo }) => {
   const { id, task, completed } = todo;
 
-  const handleToggleCompleteion = (dispatch) => {
+  const handleToggleCompleteion = () => {
     toggleCompletion(id);
+  };
+
+  const handleEdit = () => {};
+
+  const handleDelete = () => {
+    deleteTodo(id);
   };
 
   return (
@@ -22,6 +32,14 @@ const Todo = ({ todo, toggleCompletion }) => {
         >
           {task}
         </ListItemText>
+        <ListItemSecondaryAction>
+          <IconButton onClick={handleEdit}>
+            <EditIcon />
+          </IconButton>
+          <IconButton onClick={handleDelete}>
+            <DeleteIcon />
+          </IconButton>
+        </ListItemSecondaryAction>
       </ListItem>
     </>
   );
@@ -29,6 +47,7 @@ const Todo = ({ todo, toggleCompletion }) => {
 
 const mapDispatchToProps = (dispatch) => ({
   toggleCompletion: (id) => dispatch(toggleTodoCompletion(id)),
+  deleteTodo: (id) => dispatch(removeTodo(id)),
 });
 
 export default connect(null, mapDispatchToProps)(Todo);
