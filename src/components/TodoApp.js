@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import TodoForm from './TodoForm';
+import NewTodoForm from './NewTodoForm';
 import TodoList from './TodoList';
 
 class TodoApp extends Component {
   render() {
     return (
       <div>
-        <TodoForm />
+        <NewTodoForm />
         <TodoList />
       </div>
     );
