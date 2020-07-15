@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -8,40 +8,49 @@ import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 
+import EditTodoForm from './EditTodoForm';
+
 import { toggleTodoCompletion, removeTodo } from '../redux/todo/todoActions';
 
 const Todo = ({ todo, toggleCompletion, deleteTodo }) => {
   const { id, task, completed } = todo;
+  const [isEditing, setIsEditing] = useState(false);
 
   const handleToggleCompleteion = () => {
     toggleCompletion(id);
   };
 
-  const handleEdit = () => {};
+  const toggleIsEditing = () => {
+    setIsEditing(!isEditing);
+  };
 
   const handleDelete = () => {
     deleteTodo(id);
   };
 
   return (
-    <>
-      <ListItem style={{ height: '64px' }}>
-        <Checkbox checked={completed} onClick={handleToggleCompleteion} />
-        <ListItemText
-          style={{ textDecoration: completed ? 'line-through' : '' }}
-        >
-          {task}
-        </ListItemText>
-        <ListItemSecondaryAction>
-          <IconButton onClick={handleEdit}>
-            <EditIcon />
-          </IconButton>
-          <IconButton onClick={handleDelete}>
-            <DeleteIcon />
-          </IconButton>
-        </ListItemSecondaryAction>
-      </ListItem>
-    </>
+    <ListItem style={{ height: '64px' }}>
+      {isEditing ? (
+        <EditTodoForm toggleIsEditing={toggleIsEditing} todo={todo} />
+      ) : (
+        <>
+          <Checkbox checked={completed} onClick={handleToggleCompleteion} />
+          <ListItemText
+            style={{ textDecoration: completed ? 'line-through' : '' }}
+          >
+            {task}
+          </ListItemText>
+          <ListItemSecondaryAction>
+            <IconButton onClick={toggleIsEditing}>
+              <EditIcon />
+            </IconButton>
+            <IconButton onClick={handleDelete}>
+              <DeleteIcon />
+            </IconButton>
+          </ListItemSecondaryAction>
+        </>
+      )}
+    </ListItem>
   );
 };
 

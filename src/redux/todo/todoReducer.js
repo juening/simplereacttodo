@@ -1,4 +1,9 @@
-import { TOGGLE_TODO_COMPLETION, REMOVE_TODO, ADD_TODO } from './todoTypes';
+import {
+  TOGGLE_TODO_COMPLETION,
+  REMOVE_TODO,
+  ADD_TODO,
+  UPDATE_TODO,
+} from './todoTypes';
 
 const initialState = {
   todos: [
@@ -29,6 +34,14 @@ const todoReducer = (state = initialState, action) => {
       return {
         ...state,
         todos: [...state.todos, action.payload],
+      };
+
+    case UPDATE_TODO:
+      return {
+        ...state,
+        todos: state.todos.map((todo) =>
+          todo.id === action.payload.id ? action.payload : todo
+        ),
       };
 
     default:
