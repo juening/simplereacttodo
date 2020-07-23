@@ -1,5 +1,6 @@
 import React from 'react';
 import { Provider } from 'react-redux';
+import { BrowserRouter } from 'react-router-dom';
 
 import TodoApp from './components/TodoApp';
 
@@ -10,7 +11,9 @@ import './App.css';
 function App() {
   return (
     <Provider store={store}>
-      <TodoApp />
+      <BrowserRouter>
+        <TodoApp />
+      </BrowserRouter>
     </Provider>
   );
 }

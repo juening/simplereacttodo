@@ -1,31 +1,18 @@
 import React, { Component } from 'react';
-import { withStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import NewTodoForm from './NewTodoForm';
-import TodoList from './TodoList';
+import { Switch, Route, Redirect } from 'react-router-dom';
 
-import styles from '../styles/TodoAppStyles';
+import Home from './Home';
+import SignIn from './SignIn';
 
-const TodoApp = ({ classes }) => {
-  return (
-    <Paper className={classes.root} elevation={0}>
-      <Grid container justify="center">
-        <Grid item xs={11} md={8} lg={6}>
-          <AppBar position="static" color="primary" style={{ height: '64px' }}>
-            <Toolbar>
-              <Typography>Todo App with React</Typography>
-            </Toolbar>
-          </AppBar>
-          <NewTodoForm />
-          <TodoList />
-        </Grid>
-      </Grid>
-    </Paper>
-  );
-};
+class TodoApp extends Component {
+  render() {
+    return (
+      <Switch>
+        <Route exact path="/" component={Home} />
+        <Route exact path="/sigin" component={SignIn} />
+      </Switch>
+    );
+  }
+}
 
-export default withStyles(styles)(TodoApp);
+export default TodoApp;
