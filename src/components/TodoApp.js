@@ -9,7 +9,7 @@ class TodoApp extends Component {
     return (
       <Switch>
         <Route exact path="/" component={Home} />
-        <Route exact path="/sigin" component={SignIn} />
+        <Route exact path="/signin" component={SignIn} />
       </Switch>
     );
   }
