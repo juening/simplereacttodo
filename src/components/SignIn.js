@@ -13,6 +13,8 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
+import GoogleButton from 'react-google-button';
+
 const Copyright = () => (
   <Typography variant="body2" color="textSecondary" align="center">
     {'Copyright © '}
@@ -40,6 +42,21 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(1),
   },
   submit: {
+    margin: theme.spacing(3, 0, 2),
+  },
+  spacer: {
+    marginTop: theme.spacing(3),
+    width: '100%',
+    textAlign: 'center',
+    borderBottom: '1px solid #000',
+    lineHeight: '0.1em',
+    margin: '10px 0 20px',
+    '& span': {
+      background: '#fff',
+      padding: '0 10px',
+    },
+  },
+  google: {
     margin: theme.spacing(3, 0, 2),
   },
 }));
@@ -126,6 +143,28 @@ const SignIn = () => {
           </Grid>
         </form>
       </div>
+      <h3 className={classes.spacer}>
+        {' '}
+        <span>OR</span>{' '}
+      </h3>
+
+      <Grid
+        container
+        className={classes.google}
+        spacing={0}
+        direction="column"
+        alignItems="center"
+        justify="center"
+      >
+        <Grid item xs>
+          <GoogleButton
+            onClick={() => {
+              console.log('Google button clicked');
+            }}
+          />
+        </Grid>
+      </Grid>
+
       <Box mt={8}>
         <Copyright />
       </Box>
