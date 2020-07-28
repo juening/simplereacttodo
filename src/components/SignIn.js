@@ -15,6 +15,8 @@ import Container from '@material-ui/core/Container';
 
 import GoogleButton from 'react-google-button';
 
+import { signInWithGoogle } from '../firebase/firebase';
+
 const Copyright = () => (
   <Typography variant="body2" color="textSecondary" align="center">
     {'Copyright © '}
@@ -157,11 +159,7 @@ const SignIn = () => {
         justify="center"
       >
         <Grid item xs>
-          <GoogleButton
-            onClick={() => {
-              console.log('Google button clicked');
-            }}
-          />
+          <GoogleButton onClick={signInWithGoogle} />
         </Grid>
       </Grid>
 
