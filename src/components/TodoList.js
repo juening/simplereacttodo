@@ -8,14 +8,14 @@ import Todo from './Todo';
 const TodoList = (props) => {
   console.log(props);
   return (
-    <Paper>
+    <>
       <h2>List of Todos</h2>
       <List>
         {props.todos.map((todo) => (
           <Todo key={todo.id} todo={todo} />
         ))}
       </List>
-    </Paper>
+    </>
   );
 };
 

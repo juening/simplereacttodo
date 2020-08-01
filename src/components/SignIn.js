@@ -82,12 +82,9 @@ const SignIn = () => {
   };
 
   return (
-    <Container component="main" maxWidth="xs">
+    <Grid container>
       <CssBaseline />
-      <div className={classes.paper}>
-        <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
-        </Avatar>
+      <Grid item>
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
@@ -144,7 +141,7 @@ const SignIn = () => {
             </Grid>
           </Grid>
         </form>
-      </div>
+      </Grid>
       <h3 className={classes.spacer}>
         {' '}
         <span>OR</span>{' '}
@@ -166,7 +163,7 @@ const SignIn = () => {
       <Box mt={8}>
         <Copyright />
       </Box>
-    </Container>
+    </Grid>
   );
 };
 
