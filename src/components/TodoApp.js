@@ -4,15 +4,13 @@ import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
 
 import { auth } from '../firebase/firebase';
 import { setCurrentUser } from '../redux/user/userActions';
 
 import styles from '../styles/HomeStyles';
 import Home from './Home';
+import Header from './Header';
 import SignIn from './SignIn';
 
 class TodoApp extends Component {
@@ -31,16 +29,12 @@ class TodoApp extends Component {
   }
 
   render() {
-    const { classes } = this.props;
+    const { classes, currentUser } = this.props;
     return (
       <Paper className={classes.root} elevation={0}>
         <Grid container justify="center">
           <Grid item xs={11} md={8} lg={6}>
-            <AppBar className={classes.header}>
-              <Toolbar>
-                <Typography>Todo App with React</Typography>
-              </Toolbar>
-            </AppBar>
+            <Header currentUser={currentUser} />
             <Switch>
               <Route exact path="/" component={Home} />
               <Route

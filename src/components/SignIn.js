@@ -152,7 +152,7 @@ const SignIn = () => {
         className={classes.google}
         spacing={0}
         direction="column"
-        alignItems="center"
+        alignItems="left"
         justify="center"
       >
         <Grid item xs>

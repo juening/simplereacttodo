@@ -5,10 +5,4 @@ export default {
     height: '100vh',
     backgroundColor: '#fafafa',
   },
-  header: {
-    margin: '1rem 0 1rem ',
-    position: 'static',
-    color: 'primary',
-    height: '64px',
-  },
 };
