@@ -18,5 +18,6 @@ export default {
   },
   option: {
     color: 'inherit',
+    cursor: 'pointer',
   },
 };

@@ -17,9 +17,8 @@ class TodoApp extends Component {
   unsubscribeFromAuth = null;
 
   componentDidMount() {
+    const { setCurrentUser } = this.props;
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
-      console.log(userAuth);
-
       setCurrentUser(userAuth);
     });
   }
@@ -34,15 +33,13 @@ class TodoApp extends Component {
       <Paper className={classes.root} elevation={0}>
         <Grid container justify="center">
           <Grid item xs={11} md={8} lg={6}>
-            <Header currentUser={currentUser} />
+            <Header />
             <Switch>
               <Route exact path="/" component={Home} />
               <Route
                 exact
                 path="/signin"
-                render={() =>
-                  this.props.currentUser ? <Redirect to="/" /> : <SignIn />
-                }
+                render={() => (currentUser ? <Redirect to="/" /> : <SignIn />)}
               />
             </Switch>
           </Grid>
@@ -57,7 +54,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  setCurrentUser: (user) => dispatch(setCurrentUser),
+  setCurrentUser: (user) => dispatch(setCurrentUser(user)),
 });
 
 export default withStyles(styles)(

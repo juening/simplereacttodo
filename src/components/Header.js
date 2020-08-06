@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-
+import { connect } from 'react-redux';
 import Typography from '@material-ui/core/Typography';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -11,6 +11,7 @@ import styles from '../styles/HeaderStyles';
 import { auth } from '../firebase/firebase';
 
 const Header = ({ currentUser, classes }) => {
+  console.log(currentUser);
   return (
     <div className={classes.root}>
       <AppBar className={classes.header}>
@@ -31,4 +32,8 @@ const Header = ({ currentUser, classes }) => {
   );
 };
 
-export default withStyles(styles)(Header);
+const mapStateToProps = (state) => ({
+  currentUser: state.user.currentUser,
+});
+
+export default withStyles(styles)(connect(mapStateToProps)(Header));
