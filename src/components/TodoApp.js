@@ -12,6 +12,7 @@ import styles from '../styles/HomeStyles';
 import Home from './Home';
 import Header from './Header';
 import SignIn from './SignIn';
+import SignUp from './SignUp';
 
 class TodoApp extends Component {
   unsubscribeFromAuth = null;
@@ -41,6 +42,7 @@ class TodoApp extends Component {
                 path="/signin"
                 render={() => (currentUser ? <Redirect to="/" /> : <SignIn />)}
               />
+              <Route exact path="/signup" component={SignUp} />
             </Switch>
           </Grid>
         </Grid>

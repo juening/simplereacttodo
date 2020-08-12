@@ -22,9 +22,14 @@ const Header = ({ currentUser, classes }) => {
               SIGN OUT
             </div>
           ) : (
-            <Link to="/signin" className={classes.option}>
-              SIGN IN
-            </Link>
+            <div className={classes.options}>
+              <Link to="/signin" className={classes.option}>
+                SIGN IN
+              </Link>
+              <Link to="/signup" className={classes.option}>
+                SIGN UP
+              </Link>
+            </div>
           )}
         </Toolbar>
       </AppBar>

@@ -1,12 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import Paper from '@material-ui/core/Paper';
+
 import List from '@material-ui/core/List';
 
 import Todo from './Todo';
 
 const TodoList = (props) => {
-  console.log(props);
   return (
     <>
       <h2>List of Todos</h2>

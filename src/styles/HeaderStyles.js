@@ -16,8 +16,16 @@ export default {
     flexGrow: 1,
     color: 'inherit',
   },
+  options: {
+    width: '50%',
+    height: '100%',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+  },
   option: {
     color: 'inherit',
     cursor: 'pointer',
+    padding: '10px 15px',
   },
 };

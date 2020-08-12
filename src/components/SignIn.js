@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Avatar from '@material-ui/core/Avatar';
+
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
@@ -14,7 +14,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 import GoogleButton from 'react-google-button';
 
-import { signInWithGoogle } from '../firebase/firebase';
+import { auth, signInWithGoogle } from '../firebase/firebase';
 
 const Copyright = () => (
   <Typography variant="body2" color="textSecondary" align="center">
@@ -76,8 +76,15 @@ const SignIn = () => {
     setUser({ ...user, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
+    try {
+      await auth.signInWithEmailAndPassword(email, password);
+      setUser({ email: '', password: '' });
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   return (
@@ -85,7 +92,7 @@ const SignIn = () => {
       <CssBaseline />
       <Grid item>
         <Typography component="h1" variant="h5">
-          Sign in
+          Sign In
         </Typography>
         <form className={classes.form} noValidate onSubmit={handleSubmit}>
           <TextField
@@ -134,7 +141,7 @@ const SignIn = () => {
               </Link>
             </Grid>
             <Grid item>
-              <Link href="#" variant="body2">
+              <Link to="signup" variant="body2">
                 {"Don't have an account? Sign Up"}
               </Link>
             </Grid>
