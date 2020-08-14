@@ -6,6 +6,8 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
 
+import { auth, createUserProfileDocument } from '../firebase/firebase';
+
 import styles from '../styles/SignUpStyles';
 
 class SignUp extends Component {
@@ -29,16 +31,31 @@ class SignUp extends Component {
       alert("passwords don't match");
       return;
     }
+
+    try {
+      const { user } = await auth.createUserWithEmailAndPassword(
+        email,
+        password
+      );
+
+      console.log(user);
+
+      await createUserProfileDocument(user, { displayName });
+
+      this.setState({
+        displayName: '',
+        email: '',
+        password: '',
+        confirmPassword: '',
+      });
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   render() {
-    const {
-      displayName,
-      email,
-      password,
-      confirmPassword,
-      classes,
-    } = this.state;
+    const { displayName, email, password, confirmPassword } = this.state;
+    const { classes } = this.props;
 
     return (
       <Grid container>
@@ -66,6 +83,7 @@ class SignUp extends Component {
               margin="normal"
               required
               fullWidth
+              type="email"
               id="email"
               label="Email Address"
               name="email"
@@ -78,6 +96,7 @@ class SignUp extends Component {
               margin="normal"
               required
               fullWidth
+              type="password"
               id="password"
               label="Password"
               name="password"
@@ -90,6 +109,7 @@ class SignUp extends Component {
               margin="normal"
               required
               fullWidth
+              type="password"
               id="confirmPassword"
               label="Confirm Password"
               name="confirmPassword"
@@ -104,7 +124,7 @@ class SignUp extends Component {
               color="primary"
               className={classes.submit}
             >
-              Sign In
+              Sign Up
             </Button>
           </form>
         </Grid>

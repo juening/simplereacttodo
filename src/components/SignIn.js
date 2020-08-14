@@ -100,6 +100,7 @@ const SignIn = () => {
             margin="normal"
             required
             fullWidth
+            type="email"
             id="email"
             label="Email Address"
             name="email"
@@ -113,6 +114,7 @@ const SignIn = () => {
             margin="normal"
             required
             fullWidth
+            type="password"
             name="password"
             label="Password"
             type="password"

@@ -42,7 +42,11 @@ class TodoApp extends Component {
                 path="/signin"
                 render={() => (currentUser ? <Redirect to="/" /> : <SignIn />)}
               />
-              <Route exact path="/signup" component={SignUp} />
+              <Route
+                exact
+                path="/signup"
+                render={() => (currentUser ? <Redirect to="/" /> : <SignUp />)}
+              />
             </Switch>
           </Grid>
         </Grid>
