@@ -5,7 +5,7 @@ import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 
-import { auth } from '../firebase/firebase';
+import { auth, createUserProfileDocument } from '../firebase/firebase';
 import { setCurrentUser } from '../redux/user/userActions';
 
 import styles from '../styles/HomeStyles';
@@ -20,7 +20,14 @@ class TodoApp extends Component {
   componentDidMount() {
     const { setCurrentUser } = this.props;
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
-      setCurrentUser(userAuth);
+      if (userAuth) {
+        const userRef = await createUserProfileDocument(userAuth);
+        userRef.onSnapshot((snapShot) =>
+          setCurrentUser({ id: snapShot.id, ...snapShot.data() })
+        );
+      } else {
+        setCurrentUser(userAuth);
+      }
     });
   }
 
