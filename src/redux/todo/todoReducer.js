@@ -2,6 +2,7 @@ import {
   TOGGLE_TODO_COMPLETION,
   REMOVE_TODO,
   ADD_TODO,
+  GET_TODOS,
   UPDATE_TODO,
 } from './todoTypes';
 
@@ -30,10 +31,10 @@ const todoReducer = (state = initialState, action) => {
         todos: state.todos.filter((todo) => todo.id !== action.payload),
       };
 
-    case ADD_TODO:
+    case GET_TODOS:
       return {
         ...state,
-        todos: [...state.todos, action.payload],
+        todos: action.payload,
       };
 
     case UPDATE_TODO:

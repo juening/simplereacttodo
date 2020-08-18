@@ -6,12 +6,17 @@ import TextField from '@material-ui/core/TextField';
 
 import { addTodo } from '../redux/todo/todoActions';
 
-const NewTodoForm = ({ addTodo }) => {
+const NewTodoForm = ({ addTodo, currentUser }) => {
   const [task, setTask] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const newTodo = { id: uuidv4(), task, completed: false };
+    const newTodo = {
+      id: uuidv4(),
+      task,
+      userId: currentUser.id,
+      completed: false,
+    };
     addTodo(newTodo);
     setTask('');
   };
@@ -30,8 +35,12 @@ const NewTodoForm = ({ addTodo }) => {
   );
 };
 
+const mapStateToProps = (state) => ({
+  currentUser: state.user.currentUser,
+});
+
 const mapDispatchToProps = (dispatch) => ({
   addTodo: (newTodo) => dispatch(addTodo(newTodo)),
 });
 
-export default connect(null, mapDispatchToProps)(NewTodoForm);
+export default connect(mapStateToProps, mapDispatchToProps)(NewTodoForm);

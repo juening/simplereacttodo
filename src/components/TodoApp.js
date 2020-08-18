@@ -22,8 +22,8 @@ class TodoApp extends Component {
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
       if (userAuth) {
         const userRef = await createUserProfileDocument(userAuth);
-        userRef.onSnapshot((snapShot) =>
-          setCurrentUser({ id: snapShot.id, ...snapShot.data() })
+        userRef.onSnapshot((snapshot) =>
+          setCurrentUser({ id: snapshot.id, ...snapshot.data() })
         );
       } else {
         setCurrentUser(userAuth);
