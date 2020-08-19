@@ -8,23 +8,34 @@ import {
 
 import { firestore } from '../../firebase/firebase';
 
+//should have an  function for async callbacks
+
 export const getTodos = (userId) => async (dispatch) => {
   const todosRef = firestore.collection(`users/${userId}/todos`);
 
-  const todosSnapshot = await todosRef.get();
-  const userTodos = todosSnapshot.docs.map((todo) => todo.data());
-  dispatch({ type: GET_TODOS, payload: userTodos });
+  try {
+    const todosSnapshot = await todosRef.get();
+    const userTodos = todosSnapshot.docs.map((todo) =>
+      Object.assign({ uid: todo.id }, todo.data())
+    );
+    dispatch({ type: GET_TODOS, payload: userTodos });
+  } catch (err) {
+    console.error(err);
+  }
 };
 
-export const toggleTodoCompletion = (id) => ({
-  type: TOGGLE_TODO_COMPLETION,
-  payload: id,
-});
+export const toggleTodoCompletion = (todo) => ({});
 
-export const removeTodo = (id) => ({
-  type: REMOVE_TODO,
-  payload: id,
-});
+export const removeTodo = (todo) => async (dispatch) => {
+  const todoRef = firestore.doc(`/users/${todo.userId}/todos/${todo.uid}`);
+  try {
+    const res = await todoRef.delete();
+    console.log(res);
+    dispatch(getTodos(todo.userId));
+  } catch (err) {
+    console.error(err);
+  }
+};
 
 export const addTodo = (newTodo) => async (dispatch) => {
   const todosRef = firestore.collection(`users/${newTodo.userId}/todos`);

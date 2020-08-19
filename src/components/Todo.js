@@ -13,11 +13,11 @@ import EditTodoForm from './EditTodoForm';
 import { toggleTodoCompletion, removeTodo } from '../redux/todo/todoActions';
 
 const Todo = ({ todo, toggleCompletion, deleteTodo }) => {
-  const { id, task, completed } = todo;
+  const { task, completed } = todo;
   const [isEditing, setIsEditing] = useState(false);
 
   const handleToggleCompleteion = () => {
-    toggleCompletion(id);
+    toggleCompletion(todo);
   };
 
   const toggleIsEditing = () => {
@@ -25,7 +25,7 @@ const Todo = ({ todo, toggleCompletion, deleteTodo }) => {
   };
 
   const handleDelete = () => {
-    deleteTodo(id);
+    deleteTodo(todo);
   };
 
   return (
@@ -56,7 +56,7 @@ const Todo = ({ todo, toggleCompletion, deleteTodo }) => {
 
 const mapDispatchToProps = (dispatch) => ({
   toggleCompletion: (id) => dispatch(toggleTodoCompletion(id)),
-  deleteTodo: (id) => dispatch(removeTodo(id)),
+  deleteTodo: (todo) => dispatch(removeTodo(todo)),
 });
 
 export default connect(null, mapDispatchToProps)(Todo);

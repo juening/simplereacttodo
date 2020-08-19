@@ -12,7 +12,6 @@ const NewTodoForm = ({ addTodo, currentUser }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const newTodo = {
-      id: uuidv4(),
       task,
       userId: currentUser.id,
       completed: false,

@@ -1,16 +1,7 @@
-import {
-  TOGGLE_TODO_COMPLETION,
-  REMOVE_TODO,
-  ADD_TODO,
-  GET_TODOS,
-  UPDATE_TODO,
-} from './todoTypes';
+import { TOGGLE_TODO_COMPLETION, GET_TODOS, UPDATE_TODO } from './todoTypes';
 
 const initialState = {
-  todos: [
-    { id: 1, task: 'Release lady bugs into garden.', completed: false },
-    { id: 2, task: 'Mow the lawn with goats', completed: true },
-  ],
+  todos: [],
 };
 
 const todoReducer = (state = initialState, action) => {
@@ -23,12 +14,6 @@ const todoReducer = (state = initialState, action) => {
             ? { ...todo, completed: !todo.completed }
             : todo
         ),
-      };
-
-    case REMOVE_TODO:
-      return {
-        ...state,
-        todos: state.todos.filter((todo) => todo.id !== action.payload),
       };
 
     case GET_TODOS:
