@@ -1,4 +1,4 @@
-import { GET_TODOS, UPDATE_TODO } from './todoTypes';
+import { GET_TODOS } from './todoTypes';
 
 import { firestore } from '../../firebase/firebase';
 
@@ -48,7 +48,12 @@ export const addTodo = (newTodo) => async (dispatch) => {
   }
 };
 
-export const updateTodo = (newTodo) => ({
-  type: UPDATE_TODO,
-  payload: newTodo,
-});
+export const updateTodo = (newTodo) => async (dispatch) => {
+  const todoRef = firestore.doc(`users/${newTodo.userId}/todos/${newTodo.uid}`);
+  try {
+    await todoRef.set(newTodo);
+    dispatch(getTodos(newTodo.userId));
+  } catch (err) {
+    console.error(err);
+  }
+};
