@@ -1,10 +1,4 @@
-import {
-  TOGGLE_TODO_COMPLETION,
-  REMOVE_TODO,
-  ADD_TODO,
-  GET_TODOS,
-  UPDATE_TODO,
-} from './todoTypes';
+import { GET_TODOS, UPDATE_TODO } from './todoTypes';
 
 import { firestore } from '../../firebase/firebase';
 
@@ -24,13 +18,20 @@ export const getTodos = (userId) => async (dispatch) => {
   }
 };
 
-export const toggleTodoCompletion = (todo) => ({});
+export const toggleTodoCompletion = (todo) => async (dispatch) => {
+  const todoRef = firestore.doc(`users/${todo.userId}/todos/${todo.uid}`);
+  try {
+    await todoRef.set({ completed: !todo.completed }, { merge: true });
+    dispatch(getTodos(todo.userId));
+  } catch (err) {
+    console.error(err);
+  }
+};
 
 export const removeTodo = (todo) => async (dispatch) => {
   const todoRef = firestore.doc(`/users/${todo.userId}/todos/${todo.uid}`);
   try {
-    const res = await todoRef.delete();
-    console.log(res);
+    await todoRef.delete();
     dispatch(getTodos(todo.userId));
   } catch (err) {
     console.error(err);
@@ -40,7 +41,7 @@ export const removeTodo = (todo) => async (dispatch) => {
 export const addTodo = (newTodo) => async (dispatch) => {
   const todosRef = firestore.collection(`users/${newTodo.userId}/todos`);
   try {
-    const res = await todosRef.doc().set(newTodo);
+    await todosRef.doc().set(newTodo);
     dispatch(getTodos(newTodo.userId));
   } catch (err) {
     console.error(err);

@@ -55,7 +55,7 @@ const Todo = ({ todo, toggleCompletion, deleteTodo }) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  toggleCompletion: (id) => dispatch(toggleTodoCompletion(id)),
+  toggleCompletion: (todo) => dispatch(toggleTodoCompletion(todo)),
   deleteTodo: (todo) => dispatch(removeTodo(todo)),
 });
 

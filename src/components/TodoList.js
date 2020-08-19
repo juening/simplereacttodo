@@ -11,7 +11,7 @@ const TodoList = ({ currentUser, getTodos, todos }) => {
     if (currentUser) {
       getTodos(currentUser.id);
     }
-  }, [currentUser]);
+  }, [currentUser, getTodos]);
 
   return (
     <>

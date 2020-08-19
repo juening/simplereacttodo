@@ -117,7 +117,6 @@ const SignIn = () => {
             type="password"
             name="password"
             label="Password"
-            type="password"
             id="password"
             value={password}
             onChange={handleChange}
