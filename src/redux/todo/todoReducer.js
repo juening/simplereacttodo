@@ -1,4 +1,4 @@
-import { GET_TODOS } from './todoTypes';
+import { GET_TODOS, CLEAR_TODOS } from './todoTypes';
 
 const initialState = {
   todos: [],
@@ -10,6 +10,12 @@ const todoReducer = (state = initialState, action) => {
       return {
         ...state,
         todos: action.payload,
+      };
+
+    case CLEAR_TODOS:
+      return {
+        ...state,
+        todos: [],
       };
 
     default:

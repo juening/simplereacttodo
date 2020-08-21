@@ -9,16 +9,21 @@ import { withStyles } from '@material-ui/core/styles';
 
 import styles from '../styles/HeaderStyles';
 import { auth } from '../firebase/firebase';
+import { clearTodos } from '../redux/todo/todoActions';
 
-const Header = ({ currentUser, classes }) => {
-  console.log(currentUser);
+const Header = ({ currentUser, classes, clearTodos }) => {
+  const signOut = () => {
+    auth.signOut();
+    clearTodos();
+  };
+
   return (
     <div className={classes.root}>
       <AppBar className={classes.header}>
         <Toolbar>
           <Typography className={classes.title}>Todo App with React</Typography>
           {currentUser ? (
-            <div className={classes.option} onClick={() => auth.signOut()}>
+            <div className={classes.option} onClick={signOut}>
               SIGN OUT
             </div>
           ) : (
@@ -41,4 +46,10 @@ const mapStateToProps = (state) => ({
   currentUser: state.user.currentUser,
 });
 
-export default withStyles(styles)(connect(mapStateToProps)(Header));
+const mapDispatchToProps = (dispatch) => ({
+  clearTodos: () => dispatch(clearTodos()),
+});
+
+export default withStyles(styles)(
+  connect(mapStateToProps, mapDispatchToProps)(Header)
+);

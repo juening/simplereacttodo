@@ -1,4 +1,4 @@
-import { GET_TODOS } from './todoTypes';
+import { GET_TODOS, CLEAR_TODOS } from './todoTypes';
 
 import { firestore } from '../../firebase/firebase';
 
@@ -57,3 +57,7 @@ export const updateTodo = (newTodo) => async (dispatch) => {
     console.error(err);
   }
 };
+
+export const clearTodos = () => ({
+  type: CLEAR_TODOS,
+});
